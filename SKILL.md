@@ -36,19 +36,14 @@ A Claude Code skill that downloads YouTube videos, extracts audio, fetches trans
 ## workflow
 
 1. parse the `/ytd` invocation to extract the URL and all flags
-2. verify that `ytd.py` exists in the current directory; if not, tell the user to download it:
-   ```bash
-   curl -fsSL https://raw.githubusercontent.com/pavelsimo/ytd/main/ytd.py -o ytd.py
-   chmod +x ytd.py
-   ```
-3. resolve the output directory: use `--output` if provided; default to `.`
-4. construct the full command with all parsed flags:
+2. resolve the output directory: use `--output` if provided; default to `.`
+3. construct the full command with all parsed flags:
    ```bash
    uv run --upgrade ytd.py <url> [flags]
    ```
-5. run the command via Bash and stream output to the terminal
-6. on success: confirm what was downloaded or print the transcript inline
-7. on error: surface the exact yt-dlp error message and suggest a fix:
+4. run the command via Bash and stream output to the terminal
+5. on success: confirm what was downloaded or print the transcript inline
+6. on error: surface the exact yt-dlp error message and suggest a fix:
    - `Video unavailable` → video is private, removed, or region-locked
    - `No subtitles found for language 'X'` → the error output lists available codes; suggest re-running with one of them
    - `ffmpeg not found` → instruct the user to install ffmpeg (`brew install ffmpeg` / `sudo apt install ffmpeg`)
@@ -57,7 +52,7 @@ A Claude Code skill that downloads YouTube videos, extracts audio, fetches trans
 ## best practices
 
 - **always use `--upgrade`** — pass `uv run --upgrade` on every invocation; this ensures yt-dlp is the latest version, critical for YouTube compatibility
-- **transcript to file** — when the user wants to save a transcript, append `> filename.txt` rather than writing a separate file: `uv run --upgrade ytd.py <url> --transcript > notes.txt`
+- **transcript to file** — when the user wants to save a transcript, append `> filename.txt` rather than writing a separate file: `ytd <url> --transcript > notes.txt`
 - **language codes** — use IETF BCP 47 codes: `en`, `es`, `fr`, `de`, `zh-Hans`, `pt-BR`; the script accepts prefix matches (`en` matches `en-US`)
 - **quality vs format** — `--quality` selects by height; for codec or container control, run `--formats` first, then pass the raw format ID directly to yt-dlp
 - **playlists** — `ytd.py` operates on single videos; for playlist downloads, use the yt-dlp CLI directly: `yt-dlp <playlist-url>`

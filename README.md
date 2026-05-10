@@ -5,19 +5,17 @@ Download YouTube videos, audio, or transcripts from the command line — no conf
 ## Usage
 
 ```
-uv run --upgrade ytd.py <url>                    # best quality video (default)
-uv run --upgrade ytd.py <url> --audio            # audio only, saved as mp3
-uv run --upgrade ytd.py <url> --transcript       # transcript to stdout
-uv run --upgrade ytd.py <url> --formats          # list available formats
-uv run --upgrade ytd.py <url> --quality 1080     # cap video height to 1080p
-uv run --upgrade ytd.py <url> --lang es          # Spanish subtitles or transcript
-uv run --upgrade ytd.py <url> --output ./dir     # save to a specific directory
-uv run --upgrade ytd.py <url> --timestamps       # prefix transcript with [HH:MM:SS]
-uv run --upgrade ytd.py <url> --keep-brackets    # keep [Music] [Applause] in output
-uv run --upgrade ytd.py <url> --subs             # save subtitle files with video
+ytd <url>                    # best quality video (default)
+ytd <url> --audio            # audio only, saved as mp3
+ytd <url> --transcript       # transcript to stdout
+ytd <url> --formats          # list available formats
+ytd <url> --quality 1080     # cap video height to 1080p
+ytd <url> --lang es          # Spanish subtitles or transcript
+ytd <url> --output ./dir     # save to a specific directory
+ytd <url> --timestamps       # prefix transcript with [HH:MM:SS]
+ytd <url> --keep-brackets    # keep [Music] [Applause] in output
+ytd <url> --subs             # save subtitle files with video
 ```
-
-The `--upgrade` flag makes uv pull the latest yt-dlp before every run — important because YouTube changes its internals frequently.
 
 ## Options
 
@@ -38,11 +36,11 @@ The `--upgrade` flag makes uv pull the latest yt-dlp before every run — import
 `--transcript` extracts captions as clean readable text — no timecodes in the body, no duplicate lines from YouTube's rolling auto-caption window:
 
 ```
-uv run --upgrade ytd.py <url> --transcript
-uv run --upgrade ytd.py <url> --transcript --timestamps       # [HH:MM:SS] per line
-uv run --upgrade ytd.py <url> --transcript --lang fr          # French transcript
-uv run --upgrade ytd.py <url> --transcript | pbcopy           # copy to clipboard (macOS)
-uv run --upgrade ytd.py <url> --transcript > notes.txt        # save to file
+ytd <url> --transcript
+ytd <url> --transcript --timestamps       # [HH:MM:SS] per line
+ytd <url> --transcript --lang fr          # French transcript
+ytd <url> --transcript | pbcopy           # copy to clipboard (macOS)
+ytd <url> --transcript > notes.txt        # save to file
 ```
 
 Prefers manual subtitles; falls back to auto-generated captions. If the requested language is unavailable, the script lists what languages are available and exits.
@@ -88,10 +86,16 @@ Install [uv](https://docs.astral.sh/uv/getting-started/installation/):
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
 ```
 
-Download `ytd.py`, then run directly:
+Download `ytd.py`, then add a PowerShell alias to your profile:
 
 ```powershell
-uv run --upgrade ytd.py https://youtu.be/dQw4w9WgXcQ
+Set-Alias ytd "uv run --upgrade $HOME\bin\ytd.py"
+```
+
+Then run:
+
+```powershell
+ytd https://youtu.be/dQw4w9WgXcQ
 ```
 
 </details>
