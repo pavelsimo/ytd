@@ -1,6 +1,6 @@
 # ytd
 
-Download YouTube videos, audio, or transcripts from the command line — no config, always the latest yt-dlp.
+A skill for downloading YouTube videos, audio, or transcripts from the command line — no config needed.
 
 ## Usage
 
