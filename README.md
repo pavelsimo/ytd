@@ -1,6 +1,6 @@
 # ytd
 
-A skill for downloading YouTube videos, audio, or transcripts from the command line — no config needed.
+A skill for downloading YouTube videos, audio, or transcripts from the command line.
 
 ## Usage
 
