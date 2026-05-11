@@ -47,63 +47,42 @@ Prefers manual subtitles; falls back to auto-generated captions. If the requeste
 
 ## Installation
 
+Choose the installation target you need.
+
 <details>
-<summary>macOS / Linux</summary>
+<summary>GitHub Copilot Skill</summary>
 
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/):
+Install the skill by placing this folder under your Copilot skills directory. The required layout is:
 
-```bash
-curl -LsSf https://astral.sh/uv/install.sh | sh
+```text
+~/.copilot/skills/ytd/
+├── SKILL.md
+└── ytd.py
 ```
 
-Download the script:
+From this repository checkout:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/pavelsimo/ytd/main/ytd.py -o ~/bin/ytd.py
-chmod +x ~/bin/ytd.py
+mkdir -p ~/.copilot/skills/ytd
+cp SKILL.md ytd.py ~/.copilot/skills/ytd/
+chmod +x ~/.copilot/skills/ytd/ytd.py
 ```
 
-Add a shell alias to your `.bashrc` or `.zshrc`:
+Or clone the repository directly into the skills directory:
 
 ```bash
-alias ytd="uv run --upgrade ~/bin/ytd.py"
+git clone https://github.com/pavelsimo/ytd.git ~/.copilot/skills/ytd
+chmod +x ~/.copilot/skills/ytd/ytd.py
 ```
 
-Reload your shell and run:
-
-```bash
-ytd https://youtu.be/dQw4w9WgXcQ
-```
+For a repository-local Copilot skill, use `.github/skills/ytd/` instead of `~/.copilot/skills/ytd/`.
 
 </details>
 
 <details>
-<summary>Windows</summary>
+<summary>Claude Code Slash Command</summary>
 
-Install [uv](https://docs.astral.sh/uv/getting-started/installation/):
-
-```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
-
-Download `ytd.py`, then add a PowerShell alias to your profile:
-
-```powershell
-Set-Alias ytd "uv run --upgrade $HOME\bin\ytd.py"
-```
-
-Then run:
-
-```powershell
-ytd https://youtu.be/dQw4w9WgXcQ
-```
-
-</details>
-
-<details>
-<summary>Claude Code</summary>
-
-Install the `/ytd` skill globally:
+Install the `/ytd` command by copying `SKILL.md` into the Claude commands directory:
 
 ```bash
 mkdir -p ~/.claude/commands
@@ -111,6 +90,52 @@ cp SKILL.md ~/.claude/commands/ytd.md
 ```
 
 Then type `/ytd <url>` in any Claude Code session.
+
+</details>
+
+<details>
+<summary>Codex Skill</summary>
+
+Install the skill by placing this folder under your Codex skills directory. The required layout is:
+
+```text
+${CODEX_HOME:-~/.codex}/skills/ytd/
+├── SKILL.md
+└── ytd.py
+```
+
+From this repository checkout:
+
+```bash
+mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/ytd"
+cp SKILL.md ytd.py "${CODEX_HOME:-$HOME/.codex}/skills/ytd/"
+chmod +x "${CODEX_HOME:-$HOME/.codex}/skills/ytd/ytd.py"
+```
+
+Or clone the repository directly into the skills directory:
+
+```bash
+git clone https://github.com/pavelsimo/ytd.git "${CODEX_HOME:-$HOME/.codex}/skills/ytd"
+chmod +x "${CODEX_HOME:-$HOME/.codex}/skills/ytd/ytd.py"
+```
+
+On Windows, from this repository checkout:
+
+```powershell
+$codexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $HOME ".codex" }
+$skillDir = Join-Path $codexHome "skills\ytd"
+New-Item -ItemType Directory -Force $skillDir
+Copy-Item .\SKILL.md, .\ytd.py $skillDir
+```
+
+Or clone the repository directly into the Windows skills directory:
+
+```powershell
+$codexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $HOME ".codex" }
+git clone https://github.com/pavelsimo/ytd.git (Join-Path $codexHome "skills\ytd")
+```
+
+Restart Codex after installing so it can discover `SKILL.md`.
 
 </details>
 
@@ -124,6 +149,14 @@ FFmpeg is required for video merging and audio conversion:
 brew install ffmpeg          # macOS
 sudo apt install ffmpeg      # Debian / Ubuntu
 winget install ffmpeg        # Windows
+```
+
+A JavaScript runtime is required by yt-dlp for full YouTube compatibility. Install [deno](https://deno.com):
+
+```bash
+brew install deno            # macOS
+sudo snap install deno       # Linux
+winget install DenoLand.Deno # Windows
 ```
 
 ## Contributing
