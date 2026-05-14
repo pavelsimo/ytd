@@ -1,4 +1,4 @@
-# ytd
+# ytd skill
 
 A skill for downloading YouTube videos, audio, or transcripts from the command line.
 
