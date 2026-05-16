@@ -47,97 +47,9 @@ Prefers manual subtitles; falls back to auto-generated captions. If the requeste
 
 ## Installation
 
-Choose the installation target you need.
-
-<details>
-<summary>GitHub Copilot Skill</summary>
-
-Install the skill by placing this folder under your Copilot skills directory. The required layout is:
-
-```text
-~/.copilot/skills/ytd/
-├── SKILL.md
-└── ytd.py
-```
-
-From this repository checkout:
-
 ```bash
-mkdir -p ~/.copilot/skills/ytd
-cp SKILL.md ytd.py ~/.copilot/skills/ytd/
-chmod +x ~/.copilot/skills/ytd/ytd.py
+npx skills@latest add pavelsimo/ytd
 ```
-
-Or clone the repository directly into the skills directory:
-
-```bash
-git clone https://github.com/pavelsimo/ytd.git ~/.copilot/skills/ytd
-chmod +x ~/.copilot/skills/ytd/ytd.py
-```
-
-For a repository-local Copilot skill, use `.github/skills/ytd/` instead of `~/.copilot/skills/ytd/`.
-
-</details>
-
-<details>
-<summary>Claude Code Slash Command</summary>
-
-Install the `/ytd` command by copying `SKILL.md` into the Claude commands directory:
-
-```bash
-mkdir -p ~/.claude/commands
-cp SKILL.md ~/.claude/commands/ytd.md
-```
-
-Then type `/ytd <url>` in any Claude Code session.
-
-</details>
-
-<details>
-<summary>Codex Skill</summary>
-
-Install the skill by placing this folder under your Codex skills directory. The required layout is:
-
-```text
-${CODEX_HOME:-~/.codex}/skills/ytd/
-├── SKILL.md
-└── ytd.py
-```
-
-From this repository checkout:
-
-```bash
-mkdir -p "${CODEX_HOME:-$HOME/.codex}/skills/ytd"
-cp SKILL.md ytd.py "${CODEX_HOME:-$HOME/.codex}/skills/ytd/"
-chmod +x "${CODEX_HOME:-$HOME/.codex}/skills/ytd/ytd.py"
-```
-
-Or clone the repository directly into the skills directory:
-
-```bash
-git clone https://github.com/pavelsimo/ytd.git "${CODEX_HOME:-$HOME/.codex}/skills/ytd"
-chmod +x "${CODEX_HOME:-$HOME/.codex}/skills/ytd/ytd.py"
-```
-
-On Windows, from this repository checkout:
-
-```powershell
-$codexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $HOME ".codex" }
-$skillDir = Join-Path $codexHome "skills\ytd"
-New-Item -ItemType Directory -Force $skillDir
-Copy-Item .\SKILL.md, .\ytd.py $skillDir
-```
-
-Or clone the repository directly into the Windows skills directory:
-
-```powershell
-$codexHome = if ($env:CODEX_HOME) { $env:CODEX_HOME } else { Join-Path $HOME ".codex" }
-git clone https://github.com/pavelsimo/ytd.git (Join-Path $codexHome "skills\ytd")
-```
-
-Restart Codex after installing so it can discover `SKILL.md`.
-
-</details>
 
 ## Dependencies
 
