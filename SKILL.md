@@ -1,6 +1,6 @@
 ---
 name: ytd
-description: download YouTube videos, audio, or transcripts using yt-dlp
+description: Downloads YouTube videos, extracts audio as MP3, and fetches clean deduplicated transcripts using yt-dlp. Use when the user wants to download a YouTube video, extract its audio, or get a transcript from a YouTube URL.
 trigger: /ytd
 ---
 
